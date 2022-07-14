@@ -1,0 +1,135 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "description": "This is a provider resolver for did ev",
+        "version": "1.0.0",
+        "title": "KT Provider resolver did ev",
+        "contact": {
+            "email": "jmirandr@emeal.nttdata.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        }
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000/api",
+            "description": "Development server"
+        }
+    ],
+    "paths" : {
+        "/identifiers/{did}" : {
+            "get" : {
+                "summary" : "Get did document",
+                "description": "Get did document",
+                "produces": ["application/json"],
+                "parameters": [
+                    {
+                        "name": "did",
+                        "in": "path",
+                        "description": "did for resolver",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Options for resolver",
+                        "required": false,
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "baseBlocks" : {  "type": "number" },
+                                "lastBlocks" : {  "type": "number" },
+                                "bufferSize" : {  "type": "number" },
+                                "startBlockMargin" : {  "type": "number" },
+                                "findEvents" : {  "type": "boolean" },
+                                "keys" : {  "type": "array", "items": { "type": "string" } }
+                            }
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/didDocumentResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid did param",
+                        "content": {
+                            "text/html": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/invalidRequest"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Can't resolve did",
+                        "content": {
+                            "text/html": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/resolveFailed"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }, 
+    "components": {
+        "schemas": {
+            "didDocumentResponse": {
+                "type": "object",
+                "properties": {
+                    "@context": {
+                         "type": "string"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "authentication": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/authenticationDidDocument"
+                        }
+                    }
+                }
+            },
+            "authenticationDidDocument": {
+                "type": "object",
+                "properties": {
+                    "id": { "type": "string" },
+                    "type": { "type": "string" },
+                    "blockchainAccountId": { "type": "string" }
+                }
+            },
+            "invalidRequest": {
+                "type": "string"
+            },
+            "resolveFailed": {
+                "type": "string"
+            }
+        },
+        "securitySchemes": {
+          "bearerAuth": {
+              "type": "apiKey",
+              "name": "Authorization",
+              "in": "header"
+          }
+        }
+    },
+    "security": [
+      {
+        "bearerAuth": []
+      }
+    ]
+}
