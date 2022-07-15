@@ -19,117 +19,69 @@
         }
     ],
     "paths" : {
-        "/identifiers/{did}" : {
+        "/identifiers/{identifier}" : {
             "get" : {
-                "summary" : "Get did document",
-                "description": "Get did document",
+                "summary" : "Resolve a DID.",
+                "description": "<p>This endpoint resolves a DID. As input it takes the DID, plus DID resolution <a href='https://www.w3.org/TR/did-core/#did-resolution-options'>options</a>. The output is a DID document in one of the supported representations, plus metadata.</p> <p>See the <a href='https://w3c-ccg.github.io/did-resolution/'>DID Resolution</a> specification for additional details.</p>",
                 "produces": ["application/json"],
                 "parameters": [
                     {
-                        "name": "did",
+                        "name": "identifier",
                         "in": "path",
-                        "description": "did for resolver",
+                        "description": "The DID to be resolved.",
                         "required": true,
-                        "type": "string"
+                        "type": "string",
+                        "examples": {
+                            "example1": {
+                                "value": "did:ev:cwMLAqQCguxLzd1biFQH4xpy2M7BZXvvcXKZ7",
+                                "description": "A DID using the `ev` method."
+                            }
+                        }
                     },
                     {
-                        "in": "body",
-                        "name": "body",
-                        "description": "Options for resolver",
+                        "name": "Accept",
+                        "in": "header",
+                        "description": "The requested media type of the DID document representation or DID resolution result. See <a href='https://www.w3.org/TR/did-core/#representations'>https://www.w3.org/TR/did-core/#representations</a> and <a href='https://w3c-ccg.github.io/did-resolution/#did-resolution-result'>https://w3c-ccg.github.io/did-resolution/#did-resolution-result</a>.",
                         "required": false,
-                        "schema": {
-                            "type": "object",
-                            "properties": {
-                                "baseBlocks" : {  "type": "number" },
-                                "lastBlocks" : {  "type": "number" },
-                                "bufferSize" : {  "type": "number" },
-                                "startBlockMargin" : {  "type": "number" },
-                                "findEvents" : {  "type": "boolean" },
-                                "keys" : {  "type": "array", "items": { "type": "string" } }
+                        "type": "string",
+                        "examples": {
+                            "application/did+json": {
+                                "value": "application/json",
+                                "description": "Media type of a DID document (JSON representation)."
                             }
                         }
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "successful operation",
+                        "description": "successfully resolved!",
                         "content": {
-                            "application/json": {
+                            "application/did+json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/didDocumentResponse"
+                                    "type": "object",
+                                    "description": "The DID document (JSON representation).",
+                                    "example": {
+                                        "@context": "https://w3id.org/did/v1",
+                                        "id": "did:ev:2uzPtwJmXbBqMmP9DkR7dE3FcLmgYejdJ42",
+                                        "controller": "did:ev:2uzPtwJmXbBqMmP9DkR7dE3FcLmgYejdJ42",
+                                        "authentication": [{
+                                            "id": "did:ev:2uzPtwJmXbBqMmP9DkR7dE3FcLmgYejdJ42#keys-1",
+                                            "type": "EcdsaSecp256k1RecoveryMethod2020",
+                                            "blockchainAccountId": "eip155:1:0xaeaefd50a2c5cda393e9a1eef2d6ba23f2c4fd6d"
+                                        }]
+                                    }
                                 }
                             }
                         }
                     },
                     "400": {
-                        "description": "Invalid did param",
-                        "content": {
-                            "text/html": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/invalidRequest"
-                                }
-                            }
-                        }
+                        "description": "invalid input!"
                     },
                     "500": {
-                        "description": "Can't resolve did",
-                        "content": {
-                            "text/html": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/resolveFailed"
-                                }
-                            }
-                        }
+                        "description": "error!"
                     }
                 }
             }
         }
-    }, 
-    "components": {
-        "schemas": {
-            "didDocumentResponse": {
-                "type": "object",
-                "properties": {
-                    "@context": {
-                         "type": "string"
-                    },
-                    "id": {
-                        "type": "string"
-                    },
-                    "authentication": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/components/schemas/authenticationDidDocument"
-                        }
-                    }
-                }
-            },
-            "authenticationDidDocument": {
-                "type": "object",
-                "properties": {
-                    "id": { "type": "string" },
-                    "type": { "type": "string" },
-                    "blockchainAccountId": { "type": "string" }
-                }
-            },
-            "invalidRequest": {
-                "type": "string"
-            },
-            "resolveFailed": {
-                "type": "string"
-            }
-        },
-        "securitySchemes": {
-          "bearerAuth": {
-              "type": "apiKey",
-              "name": "Authorization",
-              "in": "header"
-          }
-        }
-    },
-    "security": [
-      {
-        "bearerAuth": []
-      }
-    ]
+    }
 }
