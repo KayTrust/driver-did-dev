@@ -3,6 +3,7 @@ import express from "express";
 import dotenv from 'dotenv';
 import logger from "./logger";
 import swaggerUi = require('swagger-ui-express');
+import YAML from 'yamljs';
 import fs = require('fs');
 
 import Routes from "./routes";
@@ -14,9 +15,7 @@ class App {
 
     public express: express.Application;
 
-    private swaggerFile: any = (process.cwd()+"/swagger.json");
-    private swaggerData: any = fs.readFileSync(this.swaggerFile, 'utf8');
-    private swaggerDocument = JSON.parse(this.swaggerData);
+    private swaggerDocument = YAML.load(process.cwd()+'/swagger.yml');
 
     constructor() {
         this.express = express();
