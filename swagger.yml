@@ -7,7 +7,7 @@ info:
   version: "1.0.0"
   title: Ev Resolver Driver
   contact:
-    email: jmirandr@emeal.nttdata.com
+    email: jmirandr@nttdata.com
 paths:
   /identifiers/{identifier}:
     get:
@@ -36,6 +36,9 @@ paths:
             application/did+json:
               value: application/json
               description: Media type of a DID document (JSON representation).
+            application/did+ld+json:
+              value: application/did+ld+json
+              description: Media type of a DID document (JSON-LD representation).
       responses:
         '200':
           description: successfully resolved!
@@ -44,6 +47,11 @@ paths:
               schema:
                 type: object
                 description: The DID document (JSON representation).
+                example: {"id":"did:ev:2uzPtwJmXbBqMmP9DkR7dE3FcLmgYejdJ42","authentication":[{"id":"did:ev:2uzPtwJmXbBqMmP9DkR7dE3FcLmgYejdJ42#keys-1","type":"EcdsaSecp256k1RecoveryMethod2020","blockchainAccountId":"eip155:1:0xaeaefd50a2c5cda393e9a1eef2d6ba23f2c4fd6d"}]}
+            application/did+ld+json:
+              schema:
+                type: object
+                description: The DID document (JSON-LD representation).
                 example: {"@context":"https://w3id.org/did/v1","id":"did:ev:2uzPtwJmXbBqMmP9DkR7dE3FcLmgYejdJ42","authentication":[{"id":"did:ev:2uzPtwJmXbBqMmP9DkR7dE3FcLmgYejdJ42#keys-1","type":"EcdsaSecp256k1RecoveryMethod2020","blockchainAccountId":"eip155:1:0xaeaefd50a2c5cda393e9a1eef2d6ba23f2c4fd6d"}]}
         '400':
           description: invalid input!

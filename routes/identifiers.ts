@@ -36,7 +36,7 @@ class Identifiers {
             const evResolver = EvResolver.getResolver(this.options);
             const resolver = new Resolver(evResolver);
             try {
-                const didDocument = await resolver.resolve(params.identifier);
+                const didDocument: any = await resolver.resolve(params.identifier);
                 logger.info(`Resolve did: ${params.identifier} - ${JSON.stringify(didDocument)}`);
                 res.status(200).json(didDocument);
             } catch (error: any) {
