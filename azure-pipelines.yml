@@ -16,13 +16,19 @@ stages:
     - job: BuildImage
       displayName: Build image
       steps:
-      # - task: Docker@2 
-      #   displayName: Build and push images Dev
-      #   inputs:
-      #     containerRegistry: 'Docker-Registry-DemoLabs'
-      #     repository: '$(DOCKER_REPOSITORY)'
-      #     command: 'buildAndPush'
-      #     Dockerfile: 'Dockerfile'
+      - script: |
+          echo ****Display****   
+          ls -la
+        workingDirectory: '$(Pipeline.Workspace)/s'
+        displayName: 'Display  Workspace'
+
+      - task: Docker@2 
+        displayName: Build and push images Dev
+        inputs:
+          containerRegistry: 'Docker-Registry-DemoLabs'
+          repository: '$(DOCKER_REPOSITORY)'
+          command: 'buildAndPush'
+          Dockerfile: 'Dockerfile'
 
       - task: PublishPipelineArtifact@1
         displayName: 'Publish deployment.yml as an artifact'
@@ -46,10 +52,10 @@ stages:
           deploy:
             steps:
 
-            # - task: DownloadPipelineArtifact@2
-            #   inputs:
-            #     artifact: package        
-            #     path: $(Pipeline.Workspace)
+            - task: DownloadPipelineArtifact@2
+              inputs:
+                artifact: manifest        
+                path: $(Pipeline.Workspace)/s/manifest
 
             - script: 'ls -la'
               workingDirectory: '$(Pipeline.Workspace)/s'
