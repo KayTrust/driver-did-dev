@@ -1,4 +1,3 @@
-// @ts-nocheck
 import express from "express";
 import logger from "../logger";
 import dotenv from 'dotenv';

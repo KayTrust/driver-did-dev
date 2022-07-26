@@ -60,7 +60,7 @@ stages:
             - script: 'ls -la'
               workingDirectory: '$(Pipeline.Workspace)/s'
               failOnStderr: true
-              displayName: Display despues
+              displayName: Display Workspace
 
             - script: |
                 sed -i 's|{{TAG_ENV}}|'$TAG_ENV'|g; s|{{DOCKER_IMAGE_TAG}}|'$DOCKER_IMAGE_TAG'|g; s|{{NAMESPACE}}|'$NAMESPACE'|g' deployment.yml
