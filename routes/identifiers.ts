@@ -15,8 +15,6 @@ class Identifiers {
     public express: express.Application;
     private options: any = { 
         host: process.env.NODE_HOST,
-        abiIM: JSON.parse(fs.readFileSync(process.cwd()+"/abiIM.json", 'utf8')),
-        abiProxy: JSON.parse(fs.readFileSync(process.cwd()+"/abiProxy.json", 'utf8')),
         addressIM: process.env.ADDRESS_IM,
         headers: []
     };
