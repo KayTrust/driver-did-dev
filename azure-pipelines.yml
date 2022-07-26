@@ -23,6 +23,14 @@ stages:
           repository: '$(DOCKER_REPOSITORY)'
           command: 'buildAndPush'
           Dockerfile: 'Dockerfile'
+          
+      - task: PublishPipelineArtifact@1
+        displayName: 'Publish deployment.yml as an artifact'
+        inputs:
+          targetPath: '$(Pipeline.Workspace)/s/manifest/deployment.yml'
+          artifact: 'manifest'
+          artifactName: 'manifest'
+          publishLocation: 'pipeline'
   
   - stage: DeployDev
     variables:
