@@ -36,7 +36,7 @@ stages:
   - stage: DeployDev
     variables:
       TAG_ENV: dev-
-      NAMESPACE: default
+      NAMESPACE: ntt-dev
     displayName: Deploy Microservice to Dev environment
     jobs:
     - deployment: DeployDev
