@@ -41,7 +41,7 @@ stages:
     jobs:
     - deployment: DeployDev
       displayName: Deploy to Kubernetes cluster DEV
-      environment: 'EVR-ClusterKaytrust.default'
+      environment: 'EVR-AKS-NTT-DATA.ntt-dev'
       strategy:        
         runOnce:
           deploy:
