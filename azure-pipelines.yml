@@ -20,7 +20,7 @@ stages:
       - task: Docker@2 
         displayName: Build and push images Dev
         inputs:
-          containerRegistry: 'Docker-Registry-Kaytrust'
+          containerRegistry: 'Docker-Registry-NttData'
           repository: '$(DOCKER_REPOSITORY)'
           command: 'buildAndPush'
           Dockerfile: 'Dockerfile'
