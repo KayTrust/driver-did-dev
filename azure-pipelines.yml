@@ -42,9 +42,9 @@ stages:
           repository: '$(DOCKER_REPOSITORY)'
           command: 'buildAndPush'
           Dockerfile: 'Dockerfile'
-              ${{ if eq(variables['Build.SourceBranchName'], 'master') }}:
-                tags: |
-                  $(tag)
-              ${{ else }}:
-                tags: |
-                  dev
+          ${{ if eq(variables['Build.SourceBranchName'], 'master') }}:
+            tags: |
+              $(tag)
+          ${{ else }}:
+            tags: |
+              dev
