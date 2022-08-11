@@ -10,7 +10,6 @@
     "changelog": "standard-version"
   },
   "keywords": [],
-  "author": "",
   "license": "ISC",
   "dependencies": {
     "@kaytrust/ev-did-resolver": "^1.0.0",
