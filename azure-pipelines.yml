@@ -11,6 +11,10 @@ stages:
     - job: PreBuild
       displayName: Prepare build
       steps:
+      - checkout: self
+        clean: true
+        persistCredentials: true
+        displayName: 'Checkout Git Repo'
       - script: git fetch --tags
         displayName: 'Fetch tags'
       - script: git tag -l | sort -V | tail -n 1 | xargs npm version --no-git-tag-version --allow-same-version
@@ -28,6 +32,7 @@ stages:
         displayName: Set tag variable
     - job: BuildImage
       displayName: Build image
+      dependsOn: PreBuild
       steps:
       - script: |
           echo ****Display****   
