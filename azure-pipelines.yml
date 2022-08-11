@@ -15,6 +15,12 @@ stages:
         clean: true
         persistCredentials: true
         displayName: 'Checkout Git Repo'
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '14.16.1'
+        displayName: 'Install Node'
+      - script: npm install
+        displayName: 'Install packages'
       - script: git fetch --tags
         displayName: 'Fetch tags'
       - script: git tag -l | sort -V | tail -n 1 | xargs npm version --no-git-tag-version --allow-same-version
