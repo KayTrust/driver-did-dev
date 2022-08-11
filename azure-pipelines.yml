@@ -8,6 +8,24 @@ stages:
   - stage: PushApp 
     displayName: Push app
     jobs:
+    - job: PreBuild
+      displayName: Prepare build
+      steps:
+      - script: git fetch --tags
+      displayName: 'Fetch tags'
+      - script: git tag -l | sort -V | tail -n 1 | xargs npm version --no-git-tag-version --allow-same-version
+      displayName: Update package.json locally with latest version number
+      - task: Npm@1
+      displayName: 'Generate changelog and calculate version number'
+      inputs:
+        command: 'custom'
+        customCommand: 'run changelog'
+      condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+      - script: git push --follow-tags origin HEAD:$(Build.SourceBranchName)
+      displayName: 'Push git tag'
+      condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+      - script: echo "##vso[task.setvariable variable=tag;]$(git describe --tags $(git rev-list --tags --max-count=1))"
+      displayName: Set tag variable
     - job: BuildImage
       displayName: Build image
       steps:
@@ -24,11 +42,9 @@ stages:
           repository: '$(DOCKER_REPOSITORY)'
           command: 'buildAndPush'
           Dockerfile: 'Dockerfile'
-
-      - task: PublishPipelineArtifact@1
-        displayName: 'Publish deployment.yml as an artifact'
-        inputs:
-          targetPath: '$(Pipeline.Workspace)/s/manifest/deployment.yml'
-          artifact: 'manifest'
-          artifactName: 'manifest'
-          publishLocation: 'pipeline'
+              ${{ if eq(variables['Build.SourceBranchName'], 'master') }}:
+                tags: |
+                  $(tag)
+              ${{ else }}:
+                tags: |
+                  dev
