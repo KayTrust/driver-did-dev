@@ -20,10 +20,10 @@ stages:
       inputs:
         command: 'custom'
         customCommand: 'run changelog'
-      condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+      # condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
       - script: git push --follow-tags origin HEAD:$(Build.SourceBranchName)
       displayName: 'Push git tag'
-      condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
+      # condition: eq(variables['Build.SourceBranch'], 'refs/heads/master')
       - script: echo "##vso[task.setvariable variable=tag;]$(git describe --tags $(git rev-list --tags --max-count=1))"
       displayName: Set tag variable
     - job: BuildImage
