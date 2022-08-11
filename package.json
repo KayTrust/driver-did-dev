@@ -10,7 +10,6 @@
     "changelog": "standard-version"
   },
   "keywords": [],
-  "author": "Jerson Miranda - NTT Data",
   "license": "ISC",
   "dependencies": {
     "@kaytrust/ev-did-resolver": "^1.0.0",
