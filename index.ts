@@ -26,7 +26,7 @@ class App {
     private routes(): void {
 
         this.express.get("/", (req, res, next) => {
-            res.send("Welcome to KT-Provider-Resolver-did-ev");
+            res.send("Welcome to driver-did-ev");
         });
 
         this.express.use("/1.0", Routes);

@@ -1,5 +1,5 @@
 {
-  "name": "KT-Provider-Resolver-did-ev",
+  "name": "driver-did-ev",
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",
