@@ -62,22 +62,22 @@ stages:
           ls -la
         workingDirectory: '$(Pipeline.Workspace)/s'
         displayName: 'Display  Workspace'
+      # - task: Docker@2 
+      #   displayName: Build and push images to Azure Registry
+      #   inputs:
+      #     containerRegistry: 'Docker-Registry-NttData'
+      #     repository: '$(DOCKER_REPOSITORY)'
+      #     command: 'buildAndPush'
+      #     Dockerfile: 'Dockerfile'
+      #     ${{ if eq(variables['Build.SourceBranchName'], 'master') }}:
+      #       tags: |
+      #         $(tag)
+      #         latest
+      #     ${{ else }}:
+      #       tags: |
+      #         dev
       - task: Docker@2 
-        displayName: Build and push images to Azure Registry
-        inputs:
-          containerRegistry: 'Docker-Registry-NttData'
-          repository: '$(DOCKER_REPOSITORY)'
-          command: 'buildAndPush'
-          Dockerfile: 'Dockerfile'
-          ${{ if eq(variables['Build.SourceBranchName'], 'master') }}:
-            tags: |
-              $(tag)
-              latest
-          ${{ else }}:
-            tags: |
-              dev
-      - task: Docker@2 
-        displayName: Build and push images to GitHub Registry
+        displayName: Build and push images to GitHub Packages
         inputs:
           containerRegistry: 'Docker-Registry-Github-Kaytrust'
           repository: '$(DOCKER_REPOSITORY)'
