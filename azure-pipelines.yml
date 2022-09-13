@@ -80,7 +80,7 @@ stages:
         displayName: Build and push images to GitHub Packages
         inputs:
           containerRegistry: 'Docker-Registry-Github-Kaytrust'
-          repository: '$(DOCKER_REPOSITORY)'
+          repository: '$(GITHUB_ACTOR)/$(DOCKER_REPOSITORY)'
           command: 'buildAndPush'
           Dockerfile: 'Dockerfile'
           ${{ if eq(variables['Build.SourceBranchName'], 'master') }}:
