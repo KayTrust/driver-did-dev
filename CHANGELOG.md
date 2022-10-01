@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.154](https://dev.azure.com/everis-peru/KayTrust/_git/KT-Provider-Resolver-did-ev/compare/v1.0.153...v1.0.154) (2022-10-01)
+
 ### [1.0.153](https://dev.azure.com/everis-peru/KayTrust/_git/KT-Provider-Resolver-did-ev/compare/v1.0.152...v1.0.153) (2022-10-01)
 
 ### [1.0.152](https://dev.azure.com/everis-peru/KayTrust/_git/KT-Provider-Resolver-did-ev/compare/v1.0.151...v1.0.152) (2022-10-01)
