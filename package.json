@@ -1,6 +1,6 @@
 {
   "name": "driver-did-ev",
-  "version": "1.0.214",
+  "version": "1.0.215",
   "description": "",
   "main": "index.ts",
   "scripts": {
