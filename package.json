@@ -12,7 +12,7 @@
   "keywords": [],
   "license": "ISC",
   "dependencies": {
-    "@kaytrust/ev-did-resolver": "^1.0.0",
+    "@kaytrust/ev-did-resolver": "^1.1.0",
     "body-parser": "^1.20.0",
     "did-resolver": "^3.2.2",
     "dotenv": "^16.0.1",

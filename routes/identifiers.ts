@@ -12,15 +12,33 @@ dotenv.config();
 class Identifiers {
 
     public express: express.Application;
-    private options: any = { 
-        host: process.env.NODE_HOST,
-        addressIM: process.env.ADDRESS_IM,
-        headers: []
-    };
+    private options: any = { };
 
     constructor() {
         this.express = express();
+        this.loadOptions();
         this.routes();
+    }
+
+    private loadOptions(): void {
+        if (process.env.NODE_HOST)
+        this.options.host = process.env.NODE_HOST;
+        if (process.env.ADDRESS_IM)
+        this.options.addressIM = process.env.ADDRESS_IM;
+        if (process.env.HEADERS)
+        this.options.headers = JSON.parse(process.env.HEADERS);
+        if (process.env.BASE_BLOCKS)
+        this.options.baseBlocks = +process.env.BASE_BLOCKS;
+        if (process.env.LAST_BLOCKS)
+        this.options.lastBlocks = +process.env.LAST_BLOCKS;
+        if (process.env.BUFFER_SIZE)
+        this.options.bufferSize = +process.env.BUFFER_SIZE;
+        if (process.env.START_BLOCK_MARGIN)
+        this.options.startBlockMargin = +process.env.START_BLOCK_MARGIN;
+        if (process.env.FIND_EVENTS)
+        this.options.findEvents = process.env.FIND_EVENTS === 'true';
+        if (process.env.KEYS)
+        this.options.keys = JSON.parse(process.env.KEYS);
     }
 
     private routes(): void {
