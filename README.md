@@ -7,6 +7,7 @@ Run ```npm run start```
 - Run ```docker build . -t driver-did-ev``` for generate docker image
 - Run ```docker run -p 8080:8000 -e NODE_HOST=[YOUR_BLOCKCHAIN_NODE_RPC] -e ADDRESS_IM=[YOUR_SMARTCONTRACT_ADDRESS] -d driver-did-ev```for run container
 
+```driver-did-ev``` accepts the following environment variables
 
 |Key   | Description  | Default | Notes
 |---|---|---|---
