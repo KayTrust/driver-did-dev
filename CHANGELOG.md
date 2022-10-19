@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.223](https://dev.azure.com/everis-peru/KayTrust/_git/KT-Provider-Resolver-did-ev/compare/v1.0.222...v1.0.223) (2022-10-19)
+
+
+### Bug Fixes
+
+* add environments for driver options ([b5cefe8](https://dev.azure.com/everis-peru/KayTrust/_git/KT-Provider-Resolver-did-ev/commit/b5cefe8be353a092707d36815465fcaeb9a608f1))
+* wording ([f2c2f2a](https://dev.azure.com/everis-peru/KayTrust/_git/KT-Provider-Resolver-did-ev/commit/f2c2f2af994adf6b16e8bf357e734e5d18e73d66))
+
 ### [1.0.222](https://dev.azure.com/everis-peru/KayTrust/_git/KT-Provider-Resolver-did-ev/compare/v1.0.221...v1.0.222) (2022-10-01)
 
 ### [1.0.221](https://dev.azure.com/everis-peru/KayTrust/_git/KT-Provider-Resolver-did-ev/compare/v1.0.220...v1.0.221) (2022-10-01)
