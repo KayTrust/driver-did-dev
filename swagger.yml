@@ -6,8 +6,6 @@ info:
   description: This is a provider resolver for did ev
   version: "1.0.0"
   title: Ev Resolver Driver
-  contact:
-    email: jmirandr@nttdata.com
 paths:
   /identifiers/{identifier}:
     get:
